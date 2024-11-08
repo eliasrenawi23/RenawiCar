@@ -19,3 +19,25 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.table-row {
+  @apply flex p-2 border-b;
+}
+.cell-editor {
+  @apply p-1 border rounded;
+}
+.cell-display {
+  @apply p-2 cursor-pointer;
+}
+.add-row-button {
+  @apply bg-blue-500 text-white p-2 rounded mt-4;
+}
+.search-bar {
+  @apply p-2 border rounded mb-4;
+}
+.table-header {
+  @apply flex font-bold border-b-2;
+}
+.header-cell {
+  @apply p-2 cursor-pointer;
+}
