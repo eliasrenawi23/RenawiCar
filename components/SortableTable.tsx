@@ -89,6 +89,7 @@ export default function SortableTable() {
 
   return (
     <div className="rounded-md border">
+      sortedtable
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
