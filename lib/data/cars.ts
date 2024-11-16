@@ -1,3 +1,4 @@
+type options = "Active" | "Inactive" | "Pending";
 export interface Car {
   id: number;
   make: string;
@@ -10,6 +11,7 @@ export interface Car {
   purchasePrice: number; // Price at which the car was purchased
   sellingPrice: number; // Price at which the car was sold
   profit: number; // Profit or loss from the sale
+  options?: options;
 }
 export const carData: Car[] = [
   {
@@ -25,6 +27,7 @@ export const carData: Car[] = [
     purchasePrice: 18000, // Adjusted purchase price
     sellingPrice: 20000, // Selling price leading to profit
     profit: 2000, // Profit calculated
+    options: "Active",
   },
   {
     id: 2,

@@ -9,7 +9,9 @@ import {
   getSortedRowModel,
   getFilteredRowModel,
   useReactTable,
+  VisibilityState,
   ColumnFiltersState,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 import { ArrowUpDown, Loader2 } from "lucide-react";
 
@@ -23,17 +25,29 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import EditableCell from "./EditableCell";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
 
 interface SortableTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   onSave?: (data: TData[]) => Promise<void>;
+  enableSearch?: boolean;
+  enableColumnFilter?: boolean;
+  enablePagination?: boolean;
 }
 
-export const SortableTable = <TData, TValue>({
+const SortableTable = <TData, TValue>({
   columns: userColumns,
   data: initialData,
   onSave,
+  enableSearch = true,
+  enableColumnFilter = true,
+  enablePagination = true,
 }: SortableTableProps<TData, TValue>) => {
   const [data, setData] = useState(initialData);
   const [originalData, setOriginalData] = useState(initialData);
@@ -41,16 +55,16 @@ export const SortableTable = <TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
   const [isSaving, setIsSaving] = useState(false);
-
-  const updateData = (rowIndex: number, columnId: string, value: unknown) => {
-    setData((prevData) =>
-      prevData.map((row, index) =>
-        index === rowIndex ? { ...row, [columnId]: value } : row
-      )
-    );
-  };
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
   const columns = useMemo(() => {
+    const updateData = (rowIndex: number, columnId: string, value: unknown) => {
+      setData((prevData) =>
+        prevData.map((row, index) =>
+          index === rowIndex ? { ...row, [columnId]: value } : row
+        )
+      );
+    };
     return userColumns.map((column) => ({
       ...column,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -60,6 +74,12 @@ export const SortableTable = <TData, TValue>({
           rowIndex={props.row.index}
           columnId={props.column.id}
           updateData={updateData}
+          options={props.column.columnDef.options}
+          // options={
+          //   props.column.id === "options"
+          //     ? props.row.original.options
+          //     : undefined
+          // }
         />
       ),
     }));
@@ -73,8 +93,10 @@ export const SortableTable = <TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     onGlobalFilterChange: setGlobalFilter,
-    state: { sorting, columnFilters, globalFilter },
+    onColumnVisibilityChange: setColumnVisibility,
+    state: { sorting, columnFilters, globalFilter, columnVisibility },
   });
 
   const hasChanges = useMemo(
@@ -99,12 +121,42 @@ export const SortableTable = <TData, TValue>({
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <input
-          placeholder="Search all columns..."
-          value={globalFilter}
-          onChange={(e) => setGlobalFilter(e.target.value)}
-          className="max-w-sm"
-        />
+        {enableSearch && (
+          <input
+            placeholder="Search all columns..."
+            value={globalFilter}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            className="max-w-sm"
+          />
+        )}
+        {enableColumnFilter && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="ml-auto">
+                Columns
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="w-48 bg-white border border-gray-200 rounded-md p-1 shadow-lg opacity-100 z-10"
+            >
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
         {hasChanges && (
           <Button onClick={handleSaveChanges} disabled={isSaving}>
             {isSaving ? (
@@ -175,7 +227,29 @@ export const SortableTable = <TData, TValue>({
             )}
           </TableBody>
         </Table>
+        {enablePagination && (
+          <div className="flex items-center justify-end space-x-2 py-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              Next
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
 };
+
+export default SortableTable;

@@ -43,6 +43,11 @@ const useColumns = (): ColumnDef<Car>[] => {
         accessorKey: "profit",
         header: "Profit",
       },
+      {
+        accessorKey: "options",
+        header: "options",
+        options: ["Active", "Inactive", "Pending"],
+      },
     ],
     []
   );

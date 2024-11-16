@@ -5,7 +5,7 @@ import { Car, carData } from "@/lib/data/cars";
 import CarGridView from "@/components/CarGridView";
 import CarListHeader from "@/components/CarListHeader";
 import { useViewToggle } from "@/context/ViewToggleContext";
-import { SortableTable } from "./Table/SortableTable";
+import SortableTable from "./Table/SortableTable";
 import useColumns from "./useColumns";
 const HomePageContent: React.FC = () => {
   const { isTableView } = useViewToggle();
