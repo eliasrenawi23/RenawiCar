@@ -25,12 +25,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import EditableCell from "./EditableCell";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+import DropDown from "../DropDown/DropDown";
 
 interface SortableTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -130,32 +125,24 @@ const SortableTable = <TData, TValue>({
           />
         )}
         {enableColumnFilter && (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Columns
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="w-48 bg-white border border-gray-200 rounded-md p-1 shadow-lg opacity-100 z-10"
-            >
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <DropDown
+            initialValue="Columns"
+            options={table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())}
+            checkboxOptions={table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => ({
+                id: column.id,
+                label: column.id,
+                checked: column.getIsVisible(),
+                onCheckedChange: (value: boolean) =>
+                  column.toggleVisibility(!!value),
+              }))}
+            handleOptionSelect={(option) => console.log(option)} // Make sure to define `handleOptionSelect`
+            buttonLabel="Columns"
+          />
         )}
         {hasChanges && (
           <Button onClick={handleSaveChanges} disabled={isSaving}>
