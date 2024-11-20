@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   ColumnDef,
   SortingState,
@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/table";
 import EditableCell from "./EditableCell";
 import DropDown from "../DropDown/DropDown";
+import { AddRow } from "./AddRow ";
 
 interface SortableTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,15 +35,17 @@ interface SortableTableProps<TData, TValue> {
   enableSearch?: boolean;
   enableColumnFilter?: boolean;
   enablePagination?: boolean;
+  enableAddRow?: boolean; // Enable add row functionality
 }
 
 const SortableTable = <TData, TValue>({
-  columns: userColumns,
+  columns,
   data: initialData,
   onSave,
   enableSearch = true,
   enableColumnFilter = true,
   enablePagination = true,
+  enableAddRow = true, // Default to true
 }: SortableTableProps<TData, TValue>) => {
   const [data, setData] = useState(initialData);
   const [originalData, setOriginalData] = useState(initialData);
@@ -52,7 +55,7 @@ const SortableTable = <TData, TValue>({
   const [isSaving, setIsSaving] = useState(false);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
-  const columns = useMemo(() => {
+  const columnsMemos = useMemo(() => {
     const updateData = (rowIndex: number, columnId: string, value: unknown) => {
       setData((prevData) =>
         prevData.map((row, index) =>
@@ -60,7 +63,7 @@ const SortableTable = <TData, TValue>({
         )
       );
     };
-    return userColumns.map((column) => ({
+    return columns.map((column) => ({
       ...column,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cell: (props: any) => (
@@ -78,11 +81,11 @@ const SortableTable = <TData, TValue>({
         />
       ),
     }));
-  }, [userColumns]);
+  }, [columns]);
 
   const table = useReactTable({
     data,
-    columns,
+    columns: columnsMemos,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
@@ -99,6 +102,10 @@ const SortableTable = <TData, TValue>({
     [data, originalData]
   );
 
+  const DropDownOptrions = useMemo(
+    () => table.getAllColumns().filter((column) => column.getCanHide()),
+    [table]
+  );
   const handleSaveChanges = async () => {
     setIsSaving(true);
     if (onSave)
@@ -113,6 +120,9 @@ const SortableTable = <TData, TValue>({
       }
   };
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -127,19 +137,14 @@ const SortableTable = <TData, TValue>({
         {enableColumnFilter && (
           <DropDown
             initialValue="Columns"
-            options={table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())}
-            checkboxOptions={table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => ({
-                id: column.id,
-                label: column.id,
-                checked: column.getIsVisible(),
-                onCheckedChange: (value: boolean) =>
-                  column.toggleVisibility(!!value),
-              }))}
+            options={DropDownOptrions}
+            checkboxOptions={DropDownOptrions.map((column) => ({
+              id: column.id,
+              label: column.id,
+              checked: column.getIsVisible(),
+              onCheckedChange: (value: boolean) =>
+                column.toggleVisibility(!!value),
+            }))}
             handleOptionSelect={(option) => console.log(option)} // Make sure to define `handleOptionSelect`
             buttonLabel="Columns"
           />
@@ -205,7 +210,7 @@ const SortableTable = <TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={columns.length}
+                  colSpan={columnsMemos.length}
                   className="h-24 text-center"
                 >
                   No results.
@@ -213,6 +218,18 @@ const SortableTable = <TData, TValue>({
               </TableRow>
             )}
           </TableBody>
+          {enableAddRow && (
+            <AddRow<TData>
+              data={data}
+              setData={setData}
+              columns={
+                columns as {
+                  accessorKey: string;
+                  header: string;
+                }[]
+              }
+            />
+          )}
         </Table>
         {enablePagination && (
           <div className="flex items-center justify-end space-x-2 py-4">
