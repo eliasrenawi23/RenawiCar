@@ -7,7 +7,8 @@ from . import views
 
 urlpatterns = [
     # Admin endpoints
-    path('car/<uuid:car_id>/', views.MaintenanceRecordListView.as_view(), name='maintenance-list'),
-    path('', views.MaintenanceRecordCreateView.as_view(), name='maintenance-create'),
-    path('<int:pk>/', views.MaintenanceRecordDetailView.as_view(), name='maintenance-detail'),
+    path('admin/all/', views.AdminMaintenanceListView.as_view(), name='admin-maintenance-list-all'),
+    path('admin/car/<uuid:car_id>/', views.MaintenanceRecordListView.as_view(), name='admin-maintenance-list-car'),
+    path('admin/', views.MaintenanceRecordCreateView.as_view(), name='admin-maintenance-create'),
+    path('admin/<int:pk>/', views.MaintenanceRecordDetailView.as_view(), name='admin-maintenance-detail'),
 ]

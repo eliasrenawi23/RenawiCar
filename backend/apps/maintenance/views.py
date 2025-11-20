@@ -43,3 +43,13 @@ class MaintenanceRecordDetailView(generics.RetrieveUpdateDestroyAPIView):
         if self.request.method in ['PUT', 'PATCH']:
             return MaintenanceRecordCreateSerializer
         return MaintenanceRecordSerializer
+
+
+class AdminMaintenanceListView(generics.ListAPIView):
+    """
+    Admin endpoint to list all maintenance records.
+    GET /api/maintenance/admin/all/
+    """
+    queryset = MaintenanceRecord.objects.all().prefetch_related('parts')
+    serializer_class = MaintenanceRecordSerializer
+    permission_classes = [permissions.IsAdminUser]

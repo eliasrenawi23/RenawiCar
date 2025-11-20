@@ -146,6 +146,9 @@ def analytics_overview(request):
 
     return Response({
         'total_cars': total_cars,
+        'total_views': PageView.objects.count(),
+        'total_inquiries': Inquiry.objects.count(),
+        'total_sales': Sale.objects.count(),
         'available_cars': available_cars,
         'sold_cars': sold_cars,
         'cars_sold_this_month': sales_this_month,

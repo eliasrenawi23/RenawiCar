@@ -20,12 +20,14 @@ A full-stack car dealership management system with public car listings and a com
 ## ✨ Features
 
 ### Public Features
+
 - 🚗 Browse car inventory with advanced search and filtering
 - 🖼️ View detailed car information with image galleries
 - 📝 Submit inquiries about specific cars
 - 📱 Fully responsive design
 
 ### Admin Features
+
 - 📊 Comprehensive dashboard with analytics
 - ✏️ Full CRUD operations for car inventory
 - 🖼️ Multi-image upload with Cloudinary integration
@@ -39,6 +41,7 @@ A full-stack car dealership management system with public car listings and a com
 ## 🛠️ Tech Stack
 
 **Frontend:**
+
 - Next.js 14+ (React framework with App Router)
 - TypeScript
 - Tailwind CSS
@@ -46,6 +49,7 @@ A full-stack car dealership management system with public car listings and a com
 - Axios (HTTP client)
 
 **Backend:**
+
 - Django 5.x (Python web framework)
 - Django REST Framework (API)
 - PostgreSQL (database)
@@ -61,27 +65,30 @@ Before you begin, ensure you have the following installed:
 ### Required Software
 
 1. **Python 3.10 or higher**
-   - Download from: https://www.python.org/downloads/
+
+   - Download from: <https://www.python.org/downloads/>
    - During installation, check "Add Python to PATH"
    - Verify: `python --version`
 
 2. **Node.js 18 or higher**
-   - Download from: https://nodejs.org/
+
+   - Download from: <https://nodejs.org/>
    - Verify: `node --version` and `npm --version`
 
 3. **PostgreSQL 15 or higher**
-   - Download from: https://www.postgresql.org/download/
+
+   - Download from: <https://www.postgresql.org/download/>
    - Remember your PostgreSQL password during installation!
    - Verify: `psql --version`
 
 4. **Git** (optional but recommended)
-   - Download from: https://git-scm.com/downloads
+   - Download from: <https://git-scm.com/downloads>
    - Verify: `git --version`
 
 ### Accounts Needed
 
 1. **Cloudinary Account** (Free tier)
-   - Sign up at: https://cloudinary.com/users/register_free
+   - Sign up at: <https://cloudinary.com/users/register_free>
    - Note your: Cloud Name, API Key, API Secret
 
 ---
@@ -112,6 +119,7 @@ GRANT ALL PRIVILEGES ON DATABASE car_dealership TO car_admin;
 ```
 
 **Or using Command Line (Windows):**
+
 ```bash
 psql -U postgres
 CREATE DATABASE car_dealership;
@@ -234,6 +242,7 @@ Key settings are automatically loaded from `.env` file. You can customize:
 ### Frontend Configuration (`frontend/next.config.js`)
 
 Configure:
+
 - Image domains (Cloudinary)
 - API proxy settings
 - Build optimization
@@ -255,10 +264,10 @@ venv\Scripts\activate  # Windows
 python manage.py runserver
 ```
 
-Backend will run at: **http://localhost:8000**
+Backend will run at: **<http://localhost:8000>**
 
-- Django Admin: http://localhost:8000/admin
-- API Root: http://localhost:8000/api/
+- Django Admin: <http://localhost:8000/admin>
+- API Root: <http://localhost:8000/api/>
 
 #### Terminal 2: Frontend (Next.js)
 
@@ -267,14 +276,14 @@ cd frontend
 npm run dev
 ```
 
-Frontend will run at: **http://localhost:3000**
+Frontend will run at: **<http://localhost:3000>**
 
 ### 🎉 Access the Application
 
-- **Public Site**: http://localhost:3000
-- **Admin Panel**: http://localhost:3000/admin
-- **Django Admin**: http://localhost:8000/admin (backend admin panel)
-- **API**: http://localhost:8000/api/
+- **Public Site**: <http://localhost:3000>
+- **Admin Panel**: <http://localhost:3000/admin>
+- **Django Admin**: <http://localhost:8000/admin> (backend admin panel)
+- **API**: <http://localhost:8000/api/>
 
 ---
 
@@ -315,6 +324,7 @@ site2/
 ## 📚 API Documentation
 
 ### Base URL
+
 ```
 http://localhost:8000/api
 ```
@@ -322,11 +332,13 @@ http://localhost:8000/api
 ### Public Endpoints
 
 #### Get All Cars
+
 ```http
 GET /api/cars/
 ```
 
 Query Parameters:
+
 - `search`: Search by make, model, VIN
 - `make`: Filter by make
 - `year_min`, `year_max`: Filter by year range
@@ -336,21 +348,25 @@ Query Parameters:
 - `page`: Page number
 
 **Example:**
+
 ```
 GET /api/cars/?search=toyota&year_min=2020&ordering=-price&page=1
 ```
 
 #### Get Single Car
+
 ```http
 GET /api/cars/{id}/
 ```
 
 #### Submit Inquiry
+
 ```http
 POST /api/inquiries/
 ```
 
 Body:
+
 ```json
 {
   "car": 1,
@@ -364,11 +380,13 @@ Body:
 ### Admin Endpoints (Requires Authentication)
 
 #### Login
+
 ```http
 POST /api/auth/login/
 ```
 
 Body:
+
 ```json
 {
   "username": "admin",
@@ -377,6 +395,7 @@ Body:
 ```
 
 Response:
+
 ```json
 {
   "access": "eyJ0eXAiOiJKV1QiLCJh...",
@@ -385,29 +404,34 @@ Response:
 ```
 
 Use the `access` token in Authorization header:
+
 ```
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJh...
 ```
 
 #### Create Car
+
 ```http
 POST /api/admin/cars/
 Authorization: Bearer {token}
 ```
 
 #### Update Car
+
 ```http
 PUT /api/admin/cars/{id}/
 Authorization: Bearer {token}
 ```
 
 #### Delete Car
+
 ```http
 DELETE /api/admin/cars/{id}/
 Authorization: Bearer {token}
 ```
 
 #### Get Analytics
+
 ```http
 GET /api/admin/analytics/overview/
 Authorization: Bearer {token}
@@ -449,6 +473,7 @@ Detailed deployment guide will be provided separately.
 #### 1. "Module not found" errors
 
 **Solution:**
+
 ```bash
 # Backend
 cd backend
@@ -463,12 +488,14 @@ npm install
 #### 2. Database connection error
 
 **Check:**
+
 - PostgreSQL is running
 - Database exists: `car_dealership`
 - Credentials in `.env` are correct
 - Port 5432 is not blocked
 
 **Test connection:**
+
 ```bash
 psql -U car_admin -d car_dealership
 ```
@@ -476,6 +503,7 @@ psql -U car_admin -d car_dealership
 #### 3. "Port already in use"
 
 **Solution:**
+
 ```bash
 # Kill process on port 8000 (Windows)
 netstat -ano | findstr :8000
@@ -489,6 +517,7 @@ taskkill /PID <PID> /F
 #### 4. Cloudinary images not uploading
 
 **Check:**
+
 - Cloudinary credentials in `.env` are correct
 - Account is active and not over quota
 - File size is within limits
@@ -496,18 +525,21 @@ taskkill /PID <PID> /F
 #### 5. CORS errors in browser
 
 **Solution:**
+
 - Add frontend URL to `CORS_ALLOWED_ORIGINS` in backend `.env`
 - Restart Django server after changing `.env`
 
 #### 6. Virtual environment not activating
 
 **Windows PowerShell:**
+
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 venv\Scripts\Activate.ps1
 ```
 
 **Or use Command Prompt instead:**
+
 ```cmd
 venv\Scripts\activate.bat
 ```
@@ -517,16 +549,19 @@ venv\Scripts\activate.bat
 ## 📖 Learning Resources
 
 ### For Django
+
 - See [LEARNING_DJANGO.md](LEARNING_DJANGO.md) for Django tutorial
-- Official Django Docs: https://docs.djangoproject.com/
-- Django REST Framework: https://www.django-rest-framework.org/
+- Official Django Docs: <https://docs.djangoproject.com/>
+- Django REST Framework: <https://www.django-rest-framework.org/>
 
 ### For Next.js
-- Official Docs: https://nextjs.org/docs
-- React Docs: https://react.dev/
+
+- Official Docs: <https://nextjs.org/docs>
+- React Docs: <https://react.dev/>
 
 ### For TypeScript
-- TypeScript Handbook: https://www.typescriptlang.org/docs/
+
+- TypeScript Handbook: <https://www.typescriptlang.org/docs/>
 
 ---
 
@@ -535,6 +570,7 @@ venv\Scripts\activate.bat
 ### Adding a New Feature
 
 1. **Backend:**
+
    - Create/modify models in `apps/{app}/models.py`
    - Run migrations: `python manage.py makemigrations && python manage.py migrate`
    - Create serializers in `serializers.py`
@@ -599,3 +635,6 @@ This project is for educational and commercial use.
 **Last Updated:** November 9, 2025
 
 **Happy coding!** 🚗💻
+
+pass_psql
+@1234567

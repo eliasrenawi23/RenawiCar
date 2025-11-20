@@ -149,6 +149,9 @@ export interface InquiryFormData {
 // Analytics types
 export interface AnalyticsOverview {
   total_cars: number;
+  total_views: number;
+  total_inquiries: number;
+  total_sales: number;
   cars_sold_this_month: number;
   total_revenue_this_month: number;
   pending_inquiries: number;
