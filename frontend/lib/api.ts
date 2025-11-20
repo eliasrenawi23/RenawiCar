@@ -312,9 +312,63 @@ export const createCategory = async (data: Partial<Category>): Promise<Category>
 /**
  * Create brand (admin only)
  */
+/**
+ * Create brand (admin only)
+ */
 export const createBrand = async (data: Partial<Brand>): Promise<Brand> => {
   const response = await apiClient.post('/cars/admin/brands/', data);
   return response.data;
 };
 
+// ============= API OBJECT FOR HOOKS =============
+
+/**
+ * Grouped API object for use in custom hooks
+ */
+export const api = {
+  cars: {
+    list: getCars,
+    get: getCar,
+    recordView: recordCarView,
+    create: createCar,
+    update: updateCar,
+    delete: deleteCar,
+    uploadImages: uploadCarImages,
+    deleteImage: deleteCarImage,
+  },
+  categories: {
+    list: getCategories,
+    create: createCategory,
+  },
+  brands: {
+    list: getBrands,
+    create: createBrand,
+  },
+  inquiries: {
+    submit: submitInquiry,
+    list: getInquiries,
+    updateStatus: updateInquiryStatus,
+  },
+  maintenance: {
+    getForCar: getMaintenanceRecords,
+    getAll: getAllMaintenanceRecords,
+    create: createMaintenanceRecord,
+    update: updateMaintenanceRecord,
+    delete: deleteMaintenanceRecord,
+  },
+  sales: {
+    list: getSales,
+    create: createSale,
+  },
+  analytics: {
+    overview: getAnalyticsOverview,
+  },
+  auth: {
+    login,
+    logout,
+    isAuthenticated,
+  },
+};
+
 export default apiClient;
+
