@@ -110,7 +110,7 @@ export const recordCarView = async (id: string): Promise<void> => {
  */
 export const getCategories = async (): Promise<Category[]> => {
   const response = await apiClient.get('/cars/categories/');
-  return response.data;
+  return response.data.results || response.data;
 };
 
 /**
@@ -118,7 +118,7 @@ export const getCategories = async (): Promise<Category[]> => {
  */
 export const getBrands = async (): Promise<Brand[]> => {
   const response = await apiClient.get('/cars/brands/');
-  return response.data;
+  return response.data.results || response.data;
 };
 
 /**

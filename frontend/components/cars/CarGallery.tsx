@@ -25,7 +25,7 @@ export function CarGallery({ images, alt }: CarGalleryProps) {
       {/* Main Image */}
       <div className="relative w-full h-96 bg-gray-200 rounded-lg overflow-hidden">
         <Image
-          src={images[selectedIndex].image}
+          src={images[selectedIndex].image_url}
           alt={`${alt} - Image ${selectedIndex + 1}`}
           fill
           className="object-cover"
@@ -48,7 +48,7 @@ export function CarGallery({ images, alt }: CarGalleryProps) {
               }`}
             >
               <Image
-                src={image.image}
+                src={image.image_url}
                 alt={`${alt} thumbnail ${index + 1}`}
                 fill
                 className="object-cover"

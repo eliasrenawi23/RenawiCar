@@ -90,7 +90,7 @@ export default function InquiriesPage() {
                         ? 'warning'
                         : inquiry.status === 'contacted'
                         ? 'info'
-                        : 'secondary'
+                        : 'default'
                     }
                   >
                     {inquiry.status.toUpperCase()}

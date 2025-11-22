@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Navbar, Footer, Container } from '@/components/layout';
 import { Button, Spinner } from '@/components/ui';
@@ -8,10 +8,10 @@ import { CarGrid, CarFilters, SearchBar } from '@/components/cars';
 import { useCars } from '@/hooks';
 import type { CarFilters as CarFiltersType } from '@/types';
 
-export default function CarsPage() {
+function CarsContent() {
   const searchParams = useSearchParams();
   const [filters, setFilters] = useState<Partial<CarFiltersType>>({
-    category: searchParams.get('category') || undefined,
+    category: searchParams.get('category') ? Number(searchParams.get('category')) : undefined,
     status: 'available',
   });
   const [searchQuery, setSearchQuery] = useState('');
@@ -157,5 +157,17 @@ export default function CarsPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function CarsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <Spinner size="lg" />
+      </div>
+    }>
+      <CarsContent />
+    </Suspense>
   );
 }

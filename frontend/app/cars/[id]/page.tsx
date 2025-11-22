@@ -11,7 +11,7 @@ import { useState } from 'react';
 
 export default function CarDetailPage() {
   const params = useParams();
-  const carId = parseInt(params.id as string);
+  const carId = params.id as string;
 
   const { data: car, isLoading } = useCar(carId);
   const recordView = useRecordCarView();

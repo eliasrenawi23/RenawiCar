@@ -9,7 +9,7 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  const mainImage = car.images?.[0]?.image || '/placeholder-car.jpg';
+  const mainImage = car.images?.[0]?.image_url || '/placeholder-car.jpg';
 
   const statusVariant = {
     available: 'success' as const,

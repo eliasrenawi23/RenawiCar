@@ -81,7 +81,7 @@ export default function MaintenanceForm({ initialData, onSubmit, isLoading, isEd
             <Button
               type="button"
               variant="outline"
-              onClick={() => append({ part_name: '', part_cost: '', quantity: 1, notes: '' })}
+              onClick={() => append({ part_name: '', part_cost: '', quantity: 1, notes: '' } as any)}
             >
               ➕ Add Part
             </Button>
@@ -117,7 +117,7 @@ export default function MaintenanceForm({ initialData, onSubmit, isLoading, isEd
                 </div>
                 <div className="flex justify-between items-center mt-3">
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Subtotal: ${((parseFloat(parts?.[index]?.part_cost || 0) * parseInt(parts?.[index]?.quantity || 0))).toFixed(2)}
+                    Subtotal: ${((Number(parts?.[index]?.part_cost || 0) * Number(parts?.[index]?.quantity || 0))).toFixed(2)}
                   </span>
                   <Button
                     type="button"

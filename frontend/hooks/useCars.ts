@@ -8,7 +8,7 @@ export const carKeys = {
   lists: () => [...carKeys.all, 'list'] as const,
   list: (filters?: CarFilters) => [...carKeys.lists(), filters] as const,
   details: () => [...carKeys.all, 'detail'] as const,
-  detail: (id: number) => [...carKeys.details(), id] as const,
+  detail: (id: string) => [...carKeys.details(), id] as const,
 };
 
 /**
@@ -26,7 +26,7 @@ export function useCars(filters?: CarFilters) {
 /**
  * Hook to fetch a single car by ID
  */
-export function useCar(id: number) {
+export function useCar(id: string) {
   return useQuery({
     queryKey: carKeys.detail(id),
     queryFn: () => api.cars.get(id),
@@ -42,7 +42,7 @@ export function useRecordCarView() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (carId: number) => api.cars.recordView(carId),
+    mutationFn: (carId: string) => api.cars.recordView(carId),
     onSuccess: () => {
       // Invalidate analytics queries if needed
       queryClient.invalidateQueries({ queryKey: ['analytics'] });

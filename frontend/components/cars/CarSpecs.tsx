@@ -15,10 +15,7 @@ export function CarSpecs({ car }: CarSpecsProps) {
     { label: 'Color', value: car.color },
     { label: 'Transmission', value: car.transmission?.charAt(0).toUpperCase() + car.transmission?.slice(1) },
     { label: 'Fuel Type', value: car.fuel_type?.charAt(0).toUpperCase() + car.fuel_type?.slice(1) },
-    { label: 'Engine Size', value: car.engine_size ? `${car.engine_size}L` : 'N/A' },
-    { label: 'Horsepower', value: car.horsepower ? `${car.horsepower} HP` : 'N/A' },
     { label: 'VIN', value: car.vin || 'N/A' },
-    { label: 'Stock Number', value: car.stock_number || 'N/A' },
   ];
 
   return (
@@ -45,7 +42,13 @@ export function CarSpecs({ car }: CarSpecsProps) {
       {car.features && (
         <div className="mt-6 pt-6 border-t">
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Features</h3>
-          <p className="text-gray-700 whitespace-pre-line">{car.features}</p>
+          <div className="flex flex-wrap gap-2">
+            {Array.isArray(car.features) ? car.features.map((feature, index) => (
+              <span key={index} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                {feature}
+              </span>
+            )) : <p className="text-gray-700">{car.features}</p>}
+          </div>
         </div>
       )}
     </div>

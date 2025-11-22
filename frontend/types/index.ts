@@ -136,6 +136,8 @@ export interface CarFilters {
   brand?: number;
   status?: string;
   ordering?: string;
+  page?: number;
+  page_size?: number;
 }
 
 export interface InquiryFormData {

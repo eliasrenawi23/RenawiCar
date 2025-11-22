@@ -91,15 +91,15 @@ export function CarFilters({ filters, onFilterChange }: CarFiltersProps) {
             <input
               type="number"
               placeholder="Min"
-              value={localFilters.min_price || ''}
-              onChange={(e) => handleFilterChange('min_price', e.target.value || undefined)}
+              value={localFilters.price_min || ''}
+              onChange={(e) => handleFilterChange('price_min', e.target.value || undefined)}
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="number"
               placeholder="Max"
-              value={localFilters.max_price || ''}
-              onChange={(e) => handleFilterChange('max_price', e.target.value || undefined)}
+              value={localFilters.price_max || ''}
+              onChange={(e) => handleFilterChange('price_max', e.target.value || undefined)}
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -114,15 +114,15 @@ export function CarFilters({ filters, onFilterChange }: CarFiltersProps) {
             <input
               type="number"
               placeholder="Min Year"
-              value={localFilters.min_year || ''}
-              onChange={(e) => handleFilterChange('min_year', e.target.value || undefined)}
+              value={localFilters.year_min || ''}
+              onChange={(e) => handleFilterChange('year_min', e.target.value || undefined)}
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="number"
               placeholder="Max Year"
-              value={localFilters.max_year || ''}
-              onChange={(e) => handleFilterChange('max_year', e.target.value || undefined)}
+              value={localFilters.year_max || ''}
+              onChange={(e) => handleFilterChange('year_max', e.target.value || undefined)}
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
