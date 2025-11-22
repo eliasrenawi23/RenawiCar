@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/Card';
 import { Spinner } from '@/components/ui/Spinner';
 import { Badge } from '@/components/ui/Badge';
 import { format } from 'date-fns';
+import { Mail, Phone } from 'lucide-react';
 
 export default function InquiriesPage() {
   const queryClient = useQueryClient();
@@ -102,11 +103,11 @@ export default function InquiriesPage() {
                 
                 <div className="text-sm text-gray-600 dark:text-gray-400 flex flex-wrap gap-4">
                   <a href={`mailto:${inquiry.email}`} className="hover:text-primary-600 flex items-center gap-1">
-                    📧 {inquiry.email}
+                    <Mail className="w-4 h-4" /> {inquiry.email}
                   </a>
                   {inquiry.phone && (
                     <a href={`tel:${inquiry.phone}`} className="hover:text-primary-600 flex items-center gap-1">
-                      📞 {inquiry.phone}
+                      <Phone className="w-4 h-4" /> {inquiry.phone}
                     </a>
                   )}
                 </div>

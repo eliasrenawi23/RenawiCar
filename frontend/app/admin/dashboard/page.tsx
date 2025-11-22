@@ -5,6 +5,7 @@ import { getAnalyticsOverview } from '@/lib/api';
 import { Card } from '@/components/ui/Card';
 import { Spinner } from '@/components/ui/Spinner';
 import Link from 'next/link';
+import { Car, Eye, Mail, DollarSign, Plus, Wrench } from 'lucide-react';
 
 export default function AdminDashboard() {
   const { data: stats, isLoading, error } = useQuery({
@@ -29,10 +30,10 @@ export default function AdminDashboard() {
   }
 
   const statCards = [
-    { label: 'Total Cars', value: stats?.total_cars || 0, icon: '🚗', color: 'bg-blue-500' },
-    { label: 'Total Views', value: stats?.total_views || 0, icon: '👀', color: 'bg-green-500' },
-    { label: 'Inquiries', value: stats?.total_inquiries || 0, icon: '📩', color: 'bg-purple-500' },
-    { label: 'Sales', value: stats?.total_sales || 0, icon: '💰', color: 'bg-yellow-500' },
+    { label: 'Total Cars', value: stats?.total_cars || 0, Icon: Car, color: 'bg-blue-500' },
+    { label: 'Total Views', value: stats?.total_views || 0, Icon: Eye, color: 'bg-green-500' },
+    { label: 'Inquiries', value: stats?.total_inquiries || 0, Icon: Mail, color: 'bg-purple-500' },
+    { label: 'Sales', value: stats?.total_sales || 0, Icon: DollarSign, color: 'bg-yellow-500' },
   ];
 
   return (
@@ -44,19 +45,22 @@ export default function AdminDashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {statCards.map((stat) => (
-          <Card key={stat.label} className="p-6 border-0 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{stat.label}</p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{stat.value}</p>
+        {statCards.map((stat) => {
+          const Icon = stat.Icon;
+          return (
+            <Card key={stat.label} className="p-6 border-0 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{stat.label}</p>
+                  <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{stat.value}</p>
+                </div>
+                <div className={`p-3 rounded-full ${stat.color} bg-opacity-10`}>
+                  <Icon className={`w-6 h-6 ${stat.color.replace('bg-', 'text-')}`} />
+                </div>
               </div>
-              <div className={`p-3 rounded-full ${stat.color} bg-opacity-10 text-2xl`}>
-                {stat.icon}
-              </div>
-            </div>
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </div>
 
       {/* Quick Actions */}
@@ -67,7 +71,7 @@ export default function AdminDashboard() {
             <Card className="p-6 hover:border-primary-500 cursor-pointer transition-colors group">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-primary-50 dark:bg-primary-900/20 rounded-lg text-primary-600 dark:text-primary-400 group-hover:bg-primary-100 dark:group-hover:bg-primary-900/30 transition-colors">
-                  ➕
+                  <Plus className="w-6 h-6" />
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 dark:text-white">Add New Car</h3>
@@ -81,7 +85,7 @@ export default function AdminDashboard() {
             <Card className="p-6 hover:border-primary-500 cursor-pointer transition-colors group">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-primary-50 dark:bg-primary-900/20 rounded-lg text-primary-600 dark:text-primary-400 group-hover:bg-primary-100 dark:group-hover:bg-primary-900/30 transition-colors">
-                  🔧
+                  <Wrench className="w-6 h-6" />
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 dark:text-white">Log Maintenance</h3>
@@ -95,7 +99,7 @@ export default function AdminDashboard() {
             <Card className="p-6 hover:border-primary-500 cursor-pointer transition-colors group">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-primary-50 dark:bg-primary-900/20 rounded-lg text-primary-600 dark:text-primary-400 group-hover:bg-primary-100 dark:group-hover:bg-primary-900/30 transition-colors">
-                  📩
+                  <Mail className="w-6 h-6" />
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 dark:text-white">Check Inquiries</h3>

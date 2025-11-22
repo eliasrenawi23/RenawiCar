@@ -2,15 +2,25 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { 
+  LayoutDashboard, 
+  Car, 
+  Wrench, 
+  Mail, 
+  DollarSign, 
+  TrendingUp, 
+  Settings,
+  Home 
+} from 'lucide-react';
 
 const navItems = [
-  { name: 'Dashboard', href: '/admin/dashboard', icon: '📊' },
-  { name: 'Cars', href: '/admin/cars', icon: '🚗' },
-  { name: 'Maintenance', href: '/admin/maintenance', icon: '🔧' },
-  { name: 'Inquiries', href: '/admin/inquiries', icon: '📩' },
-  { name: 'Sales', href: '/admin/sales', icon: '💰' },
-  { name: 'Analytics', href: '/admin/analytics', icon: '📈' },
-  { name: 'Settings', href: '/admin/settings', icon: '⚙️' },
+  { name: 'Dashboard', href: '/admin/dashboard', Icon: LayoutDashboard },
+  { name: 'Cars', href: '/admin/cars', Icon: Car },
+  { name: 'Maintenance', href: '/admin/maintenance', Icon: Wrench },
+  { name: 'Inquiries', href: '/admin/inquiries', Icon: Mail },
+  { name: 'Sales', href: '/admin/sales', Icon: DollarSign },
+  { name: 'Analytics', href: '/admin/analytics', Icon: TrendingUp },
+  { name: 'Settings', href: '/admin/settings', Icon: Settings },
 ];
 
 export default function Sidebar() {
@@ -27,6 +37,7 @@ export default function Sidebar() {
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         {navItems.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          const Icon = item.Icon;
           return (
             <Link
               key={item.name}
@@ -37,7 +48,7 @@ export default function Sidebar() {
                   : 'text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800'
               }`}
             >
-              <span className="text-xl">{item.icon}</span>
+              <Icon className="w-5 h-5" />
               <span className="font-medium">{item.name}</span>
             </Link>
           );
@@ -49,7 +60,7 @@ export default function Sidebar() {
           href="/" 
           className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
         >
-          <span>🏠</span>
+          <Home className="w-5 h-5" />
           <span>View Website</span>
         </Link>
       </div>

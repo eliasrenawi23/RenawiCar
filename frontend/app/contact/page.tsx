@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Navbar, Footer, Container } from '@/components/layout';
 import { Button, Input, Card, CardContent } from '@/components/ui';
 import { useSubmitInquiry } from '@/hooks';
+import { CheckCircle, DollarSign, Handshake } from 'lucide-react';
 
 export default function ContactPage() {
   const submitInquiry = useSubmitInquiry();
@@ -263,21 +264,33 @@ export default function ContactPage() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
                 <div>
-                  <div className="text-3xl mb-2">✓</div>
+                  <div className="flex justify-center mb-2">
+                    <div className="p-3 bg-green-100 rounded-full">
+                      <CheckCircle className="w-6 h-6 text-green-600" />
+                    </div>
+                  </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Quality Assured</h3>
                   <p className="text-gray-600 text-sm">
                     All vehicles thoroughly inspected and verified
                   </p>
                 </div>
                 <div>
-                  <div className="text-3xl mb-2">💰</div>
+                  <div className="flex justify-center mb-2">
+                    <div className="p-3 bg-yellow-100 rounded-full">
+                      <DollarSign className="w-6 h-6 text-yellow-600" />
+                    </div>
+                  </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Best Prices</h3>
                   <p className="text-gray-600 text-sm">
                     Competitive pricing with transparent costs
                   </p>
                 </div>
                 <div>
-                  <div className="text-3xl mb-2">🤝</div>
+                  <div className="flex justify-center mb-2">
+                    <div className="p-3 bg-blue-100 rounded-full">
+                      <Handshake className="w-6 h-6 text-blue-600" />
+                    </div>
+                  </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Expert Support</h3>
                   <p className="text-gray-600 text-sm">
                     Dedicated team to help you every step

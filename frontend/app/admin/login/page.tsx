@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useMutation } from '@tanstack/react-query';
 import { login } from '@/lib/api';
 import { setTokens } from '@/lib/auth';
@@ -46,7 +47,16 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">RenawiCars Admin</h1>
+          <div className="flex justify-center mb-4">
+            <Image 
+              src="/logo.png" 
+              alt="RenawiCars Logo" 
+              width={200}
+              height={60}
+              className="h-16 w-auto"
+            />
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Admin Portal</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">Sign in to manage your dealership</p>
         </div>
 

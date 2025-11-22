@@ -10,6 +10,7 @@ import { Spinner } from '@/components/ui/Spinner';
 import { Badge } from '@/components/ui/Badge';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Plus, Car as CarIcon } from 'lucide-react';
 
 export default function AdminCarsPage() {
   const router = useRouter();
@@ -59,7 +60,7 @@ export default function AdminCarsPage() {
         </div>
         <Link href="/admin/cars/new">
           <Button>
-            <span className="mr-2">➕</span> Add New Car
+            <Plus className="w-4 h-4 mr-2" /> Add New Car
           </Button>
         </Link>
       </div>
@@ -99,7 +100,9 @@ export default function AdminCarsPage() {
                             className="h-full w-full object-cover"
                           />
                         ) : (
-                          <div className="h-full w-full flex items-center justify-center text-xl">🚗</div>
+                          <div className="h-full w-full flex items-center justify-center text-gray-400">
+                            <CarIcon className="w-5 h-5" />
+                          </div>
                         )}
                       </div>
                       <div className="ml-4">

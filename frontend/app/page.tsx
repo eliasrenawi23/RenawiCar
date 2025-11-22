@@ -5,6 +5,7 @@ import { Navbar, Footer, Container } from '@/components/layout';
 import { Button, Card, CardContent, Spinner, Badge } from '@/components/ui';
 import { CarGrid } from '@/components/cars';
 import { useFeaturedCars, useCategories } from '@/hooks';
+import { Car } from 'lucide-react';
 
 export default function Home() {
   const { data: featuredCars, isLoading: carsLoading } = useFeaturedCars(6);
@@ -85,7 +86,11 @@ export default function Home() {
                   <Link key={category.id} href={`/cars?category=${category.id}`}>
                     <Card variant="shadow" className="hover:scale-105 transition-transform cursor-pointer">
                       <CardContent className="p-6 text-center">
-                        <div className="text-4xl mb-3">🚗</div>
+                        <div className="flex justify-center mb-3">
+                          <div className="p-3 bg-blue-50 rounded-full">
+                            <Car className="w-8 h-8 text-blue-600" />
+                          </div>
+                        </div>
                         <h3 className="font-semibold text-gray-900">
                           {category.name}
                         </h3>

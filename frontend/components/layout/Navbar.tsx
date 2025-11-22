@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import Image from 'next/image';
 import { Container } from './Container';
 import { Button } from '@/components/ui';
 
@@ -19,13 +20,15 @@ export function Navbar() {
       <Container>
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">RC</span>
-            </div>
-            <span className="text-xl font-bold text-gray-900">
-              Renawi Cars
-            </span>
+          <Link href="/" className="flex items-center space-x-3">
+            <Image 
+              src="/logo.png" 
+              alt="RenawiCars Logo" 
+              width={180}
+              height={50}
+              priority
+              className="h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}

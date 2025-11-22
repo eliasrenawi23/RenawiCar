@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { logout } from '@/lib/api';
 
@@ -18,7 +19,13 @@ export default function Header() {
     <header className="h-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-6">
       <div className="md:hidden">
         {/* Mobile menu trigger would go here */}
-        <span className="font-bold text-lg">RenawiAdmin</span>
+        <Image 
+          src="/logo.png" 
+          alt="RenawiCars Logo" 
+          width={140}
+          height={40}
+          className="h-10 w-auto"
+        />
       </div>
       
       <div className="flex items-center gap-4 ml-auto">
