@@ -217,7 +217,7 @@ export const deleteCarImage = async (imageId: number): Promise<void> => {
 /**
  * Get maintenance records for a car (admin only)
  */
-export const getMaintenanceRecords = async (carId: string): Promise<MaintenanceRecord[]> => {
+export const getMaintenanceRecords = async (carId: string): Promise<PaginatedResponse<MaintenanceRecord>> => {
   const response = await apiClient.get(`/maintenance/admin/car/${carId}/`);
   return response.data;
 };
@@ -225,8 +225,16 @@ export const getMaintenanceRecords = async (carId: string): Promise<MaintenanceR
 /**
  * Get all maintenance records (admin only)
  */
-export const getAllMaintenanceRecords = async (): Promise<MaintenanceRecord[]> => {
+export const getAllMaintenanceRecords = async (): Promise<PaginatedResponse<MaintenanceRecord>> => {
   const response = await apiClient.get('/maintenance/admin/all/');
+  return response.data;
+};
+
+/**
+ * Get a single maintenance record (admin only)
+ */
+export const getMaintenanceRecord = async (id: number): Promise<MaintenanceRecord> => {
+  const response = await apiClient.get(`/maintenance/admin/${id}/`);
   return response.data;
 };
 
@@ -325,7 +333,14 @@ export const createBrand = async (data: Partial<Brand>): Promise<Brand> => {
 /**
  * Grouped API object for use in custom hooks
  */
-export const api = {
+// Import mock API for development
+import { mockApi } from '@/lib/mockApi';
+
+// Determine whether to use mock data (set NEXT_PUBLIC_USE_MOCK=true in .env.local)
+const useMock = process.env.NEXT_PUBLIC_USE_MOCK === 'true';
+
+// Original real API object
+const realApi = {
   cars: {
     list: getCars,
     get: getCar,
@@ -369,6 +384,9 @@ export const api = {
     isAuthenticated,
   },
 };
+
+// Export the appropriate API object
+export const api = useMock ? mockApi : realApi;
 
 export default apiClient;
 

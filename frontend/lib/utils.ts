@@ -17,9 +17,9 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function formatPrice(price: string | number): string {
   const numPrice = typeof price === 'string' ? parseFloat(price) : price;
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('he-IL', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'ILS',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(numPrice);
@@ -36,7 +36,7 @@ export function formatNumber(num: number): string {
  * Format date
  */
 export function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('en-US', {
+  return new Date(dateString).toLocaleDateString('he-IL', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

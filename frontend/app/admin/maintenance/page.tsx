@@ -62,7 +62,7 @@ export default function MaintenancePage() {
       </div>
 
       <div className="grid gap-6">
-        {records?.map((record: MaintenanceRecord) => (
+        {records?.results?.map((record: MaintenanceRecord) => (
           <Card key={record.id} className="p-6">
             <div className="flex flex-col md:flex-row justify-between gap-4">
               <div className="flex-1 space-y-3">
@@ -121,7 +121,7 @@ export default function MaintenancePage() {
           </Card>
         ))}
 
-        {records?.length === 0 && (
+        {records?.results?.length === 0 && (
           <div className="text-center py-12 text-gray-500 dark:text-gray-400">
             No maintenance records found. Add your first record to get started.
           </div>

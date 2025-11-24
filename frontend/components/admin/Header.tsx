@@ -20,7 +20,7 @@ export default function Header() {
       <div className="md:hidden">
         {/* Mobile menu trigger would go here */}
         <Image 
-          src="/logo.png" 
+          src="/logo-bw.png" 
           alt="RenawiCars Logo" 
           width={140}
           height={40}

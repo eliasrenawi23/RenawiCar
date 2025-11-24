@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getMaintenanceRecords, updateMaintenanceRecord } from '@/lib/api';
+import { getMaintenanceRecord, updateMaintenanceRecord } from '@/lib/api';
 import MaintenanceForm from '@/components/admin/MaintenanceForm';
 import { Spinner } from '@/components/ui/Spinner';
 import { useRouter, useParams } from 'next/navigation';
@@ -12,17 +12,11 @@ export default function EditMaintenancePage() {
   const id = parseInt(params.id as string);
   const queryClient = useQueryClient();
 
-  // Note: We need to fetch from the all records since we don't have a single record endpoint
-  const { data: allRecords, isLoading, error } = useQuery({
-    queryKey: ['maintenance-all'],
-    queryFn: async () => {
-      // This is a workaround - ideally we'd have a getMaintenanceRecord(id) function
-      const records = await import('@/lib/api').then(m => m.getAllMaintenanceRecords());
-      return records;
-    },
+  const { data: record, isLoading, error } = useQuery({
+    queryKey: ['maintenance', id],
+    queryFn: () => getMaintenanceRecord(id),
+    enabled: !!id,
   });
-
-  const record = allRecords?.find((r: any) => r.id === id);
 
   const updateMutation = useMutation({
     mutationFn: (data: any) => updateMaintenanceRecord(id, data),

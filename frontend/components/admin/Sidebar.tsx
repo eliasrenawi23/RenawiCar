@@ -58,7 +58,7 @@ export default function Sidebar() {
       <div className="p-4 border-t border-gray-200 dark:border-gray-800">
         <Link 
           href="/" 
-          className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+          className="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
         >
           <Home className="w-5 h-5" />
           <span>View Website</span>

@@ -2,8 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from './Container';
 
+import { useLanguage } from '@/context/LanguageContext';
+
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="bg-gray-900 text-gray-300 mt-auto">
@@ -14,7 +17,7 @@ export function Footer() {
             <div className="col-span-1 md:col-span-2">
               <div className="mb-4">
                 <Image 
-                  src="/logo.png" 
+                  src="/logo-bw.png" 
                   alt="RenawiCars Logo" 
                   width={180}
                   height={50}
@@ -28,21 +31,21 @@ export function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+              <h3 className="text-white font-semibold mb-4">{t.common.details}</h3>
               <ul className="space-y-2">
                 <li>
                   <Link href="/" className="hover:text-white transition-colors">
-                    Home
+                    {t.nav.home}
                   </Link>
                 </li>
                 <li>
                   <Link href="/cars" className="hover:text-white transition-colors">
-                    Browse Cars
+                    {t.nav.browseCars}
                   </Link>
                 </li>
                 <li>
                   <Link href="/contact" className="hover:text-white transition-colors">
-                    Contact Us
+                    {t.nav.contact}
                   </Link>
                 </li>
               </ul>
@@ -50,11 +53,11 @@ export function Footer() {
 
             {/* Contact Info */}
             <div>
-              <h3 className="text-white font-semibold mb-4">Contact</h3>
+              <h3 className="text-white font-semibold mb-4">{t.nav.contact}</h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="tel:+1234567890" className="hover:text-white transition-colors">
-                    +1 (234) 567-890
+                  <a href="tel:+972501234567" className="hover:text-white transition-colors" dir="ltr">
+                    +972 50-123-4567
                   </a>
                 </li>
                 <li>
@@ -63,8 +66,8 @@ export function Footer() {
                   </a>
                 </li>
                 <li className="text-gray-400">
-                  123 Auto Drive<br />
-                  Los Angeles, CA 90001
+                  HaMasger 12<br />
+                  Tel Aviv, Israel
                 </li>
               </ul>
             </div>
@@ -74,15 +77,20 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-gray-400">
-              &copy; {currentYear} Renawi Cars. All rights reserved.
-            </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <p className="text-sm text-gray-400">
+                &copy; {currentYear} Renawi Cars. {t.footer.rights}
+              </p>
+              <p className="text-sm text-gray-500">
+                {t.footer.vatIncluded}
+              </p>
+            </div>
+            <div className="flex space-x-6 rtl:space-x-reverse mt-4 md:mt-0">
               <Link href="#" className="text-sm hover:text-white transition-colors">
-                Privacy Policy
+                {t.footer.privacy}
               </Link>
               <Link href="#" className="text-sm hover:text-white transition-colors">
-                Terms of Service
+                {t.footer.terms}
               </Link>
             </div>
           </div>

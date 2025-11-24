@@ -49,7 +49,7 @@ export default function AdminLoginPage() {
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <Image 
-              src="/logo.png" 
+              src="/logo-bw.png" 
               alt="RenawiCars Logo" 
               width={200}
               height={60}

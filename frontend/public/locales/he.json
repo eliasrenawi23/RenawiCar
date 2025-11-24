@@ -1,0 +1,55 @@
+{
+    "nav": {
+        "home": "בית",
+        "browseCars": "רכבים",
+        "contact": "צור קשר",
+        "admin": "ניהול",
+        "login": "התחברות"
+    },
+    "common": {
+        "currency": "₪",
+        "loading": "טוען...",
+        "error": "אירעה שגיאה",
+        "price": "מחיר",
+        "details": "פרטים",
+        "search": "חיפוש",
+        "filter": "סינון",
+        "contactUs": "צור קשר",
+        "legal": "משפטי",
+        "adminHeader": {
+            "admin": "מנהל",
+            "logout": "התנתק"
+        },
+        "carCard": {
+            "viewDetails": "צפייה בפרטים →",
+            "mileageUnit": "ק",
+            "scheduleTestDrive": "קביעת נסיעת מבחן",
+            "makeOffer": "הצע הצעה",
+            "inquirySuccess": "תודה! נחזור אליך בקרוב."
+        },
+        "carDetail": {
+            "scheduleTestDrive": "קביעת נסיעת מבחן",
+            "makeOffer": "הצע הצעה",
+            "inquirySuccess": "תודה! נחזור אליך בקרוב."
+        }
+    },
+    "hero": {
+        "title": "מצא את הרכב המושלם שלך היום",
+        "subtitle": "גלה את האוסף שלנו של רכבים פרימיום.",
+        "description": "דפדף באוסף הרחב שלנו של רכבים איכותיים. ממכוניות יוקרה עד רכבי שטח קשוחים, יש לנו את הרכב המושלם שמחכה לך."
+    },
+    "browse": {
+        "category": "דפדף לפי קטגוריה"
+    },
+    "homepage": {
+        "customerSupport": "תמיכת לקוחות",
+        "verifiedListings": "רשימות מאומתות",
+        "qualityVehicles": "רכבים איכותיים"
+    },
+    "footer": {
+        "rights": "כל הזכויות שמורות.",
+        "privacy": "מדיניות פרטיות",
+        "terms": "תנאי שימוש",
+        "vatIncluded": "המחירים כוללים מע״מ (17%)"
+    }
+}

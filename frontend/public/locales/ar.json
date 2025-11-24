@@ -1,0 +1,55 @@
+{
+    "nav": {
+        "home": "الرئيسية",
+        "browseCars": "تصفح السيارات",
+        "contact": "اتصل بنا",
+        "admin": "إدارة",
+        "login": "تسجيل الدخول"
+    },
+    "common": {
+        "currency": "₪",
+        "loading": "جاري التحميل...",
+        "error": "حدث خطأ",
+        "price": "السعر",
+        "details": "تفاصيل",
+        "search": "بحث",
+        "filter": "تصفية",
+        "contactUs": "اتصل بنا",
+        "legal": "قانوني",
+        "adminHeader": {
+            "admin": "المسؤول",
+            "logout": "تسجيل الخروج"
+        },
+        "carCard": {
+            "viewDetails": "عرض التفاصيل →",
+            "mileageUnit": "كم",
+            "scheduleTestDrive": "جدولة تجربة القيادة",
+            "makeOffer": "تقديم عرض",
+            "inquirySuccess": "شكرًا! سنعود إليك قريبًا."
+        },
+        "carDetail": {
+            "scheduleTestDrive": "جدولة تجربة القيادة",
+            "makeOffer": "تقديم عرض",
+            "inquirySuccess": "شكرًا! سنعود إليك قريبًا."
+        }
+    },
+    "hero": {
+        "title": "اعثر على سيارتك المثالية اليوم",
+        "subtitle": "استكشف مجموعتنا من السيارات الفاخرة.",
+        "description": "تصفح مجموعتنا الواسعة من السيارات عالية الجودة. من سيارات الصالون الفاخرة إلى سيارات الدفع الرباعي القوية، لدينا السيارة المثالية التي تنتظرك."
+    },
+    "browse": {
+        "category": "تصفح حسب الفئة"
+    },
+    "homepage": {
+        "customerSupport": "دعم العملاء",
+        "verifiedListings": "قوائم موثقة",
+        "qualityVehicles": "مركبات عالية الجودة"
+    },
+    "footer": {
+        "rights": "جميع الحقوق محفوظة.",
+        "privacy": "سياسة الخصوصية",
+        "terms": "شروط الخدمة",
+        "vatIncluded": "الأسعار تشمل ضريبة القيمة المضافة (17%)"
+    }
+}

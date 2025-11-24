@@ -155,7 +155,7 @@ export default function CarDetailPage() {
                       <div className="flex justify-between">
                         <span className="text-gray-600">Mileage:</span>
                         <span className="font-medium">
-                          {car.mileage?.toLocaleString()} miles
+                          {car.mileage?.toLocaleString()} km
                         </span>
                       </div>
                       <div className="flex justify-between">

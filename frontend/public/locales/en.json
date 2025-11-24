@@ -1,0 +1,55 @@
+{
+    "nav": {
+        "home": "Home",
+        "browseCars": "Browse Cars",
+        "contact": "Contact",
+        "admin": "Admin",
+        "login": "Login"
+    },
+    "common": {
+        "currency": "ILS",
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "price": "Price",
+        "details": "Details",
+        "search": "Search",
+        "filter": "Filter",
+        "contactUs": "Contact Us",
+        "legal": "Legal",
+        "adminHeader": {
+            "admin": "Administrator",
+            "logout": "Logout"
+        },
+        "carCard": {
+            "viewDetails": "View Details →",
+            "mileageUnit": "km",
+            "scheduleTestDrive": "Schedule Test Drive",
+            "makeOffer": "Make an Offer",
+            "inquirySuccess": "Thank you! We'll get back to you shortly."
+        },
+        "carDetail": {
+            "scheduleTestDrive": "Schedule Test Drive",
+            "makeOffer": "Make an Offer",
+            "inquirySuccess": "Thank you! We'll get back to you shortly."
+        }
+    },
+    "hero": {
+        "title": "Find Your Perfect Car Today",
+        "subtitle": "Explore our collection of premium vehicles.",
+        "description": "Browse our extensive collection of quality vehicles. From luxury sedans to rugged SUVs, we have the perfect car waiting for you."
+    },
+    "browse": {
+        "category": "Browse by Category"
+    },
+    "homepage": {
+        "customerSupport": "Customer Support",
+        "verifiedListings": "Verified Listings",
+        "qualityVehicles": "Quality Vehicles"
+    },
+    "footer": {
+        "rights": "All rights reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "vatIncluded": "All prices include VAT (17%)"
+    }
+}

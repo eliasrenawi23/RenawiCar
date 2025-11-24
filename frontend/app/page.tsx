@@ -91,7 +91,7 @@ export default function Home() {
                             <Car className="w-8 h-8 text-blue-600" />
                           </div>
                         </div>
-                        <h3 className="font-semibold text-gray-900">
+                        <h3 className="font-semibold text-gray-900 dark:text-white">
                           {category.name}
                         </h3>
                       </CardContent>
