@@ -413,11 +413,13 @@ This step created the admin panel for managing the dealership.
 ---
 
 ### Step 5: Cloudinary Integration (1-2 hours)
-- [ ] Sign up for Cloudinary (free tier)
-- [ ] Add Cloudinary credentials to `.env`
-- [ ] Create image upload utility function
-- [ ] Implement in admin car form
-- [ ] Test image upload and display
+- [ ] Sign up for Cloudinary (free tier) - **User Action Required**
+- [ ] Add Cloudinary credentials to `.env` - **User Action Required**
+- [x] Create image upload utility function - **Completed**
+- [x] Implement in admin car form - **Completed**
+- [ ] Test image upload and display - **Pending Credentials**
+
+**Note:** The code for Cloudinary integration is complete. Once you add your Cloudinary credentials (`CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`) to the backend `.env` file, image uploads will work automatically.
 
 ---
 

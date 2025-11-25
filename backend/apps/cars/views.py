@@ -17,6 +17,7 @@ from .serializers import (
     CarImageSerializer
 )
 from .filters import CarFilter
+import cloudinary.uploader
 
 
 # ============= PUBLIC VIEWS =============
@@ -152,25 +153,43 @@ class AdminCarImageUploadView(generics.CreateAPIView):
             return Response({'error': 'Car not found'}, status=status.HTTP_404_NOT_FOUND)
 
         # Handle multiple image uploads
-        images_data = request.data.getlist('images', [])
-        if not images_data:
+        images = request.FILES.getlist('images')
+        
+        if not images:
             return Response({'error': 'No images provided'}, status=status.HTTP_400_BAD_REQUEST)
 
         created_images = []
-        for image_data in images_data:
-            # Here you would upload to Cloudinary
-            # For now, we'll just create the record
-            # You'll need to implement Cloudinary upload logic
-            serializer = self.get_serializer(data={
-                'car': car_id,
-                'image_url': image_data.get('image_url'),
-                'cloudinary_public_id': image_data.get('cloudinary_public_id'),
-                'is_primary': image_data.get('is_primary', False),
-                'order': image_data.get('order', 0)
-            })
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            created_images.append(serializer.data)
+        errors = []
+
+        for image_file in images:
+            try:
+                # Upload to Cloudinary
+                upload_result = cloudinary.uploader.upload(
+                    image_file,
+                    folder="renawicars/cars"
+                )
+                
+                # Create CarImage record
+                car_image = CarImage.objects.create(
+                    car=car,
+                    image_url=upload_result.get('secure_url'),
+                    cloudinary_public_id=upload_result.get('public_id'),
+                    is_primary=False
+                )
+                
+                # If this is the first image, make it primary
+                if car.images.count() == 1:
+                    car_image.is_primary = True
+                    car_image.save()
+                
+                serializer = self.get_serializer(car_image)
+                created_images.append(serializer.data)
+                
+            except Exception as e:
+                errors.append(f"Failed to upload {image_file.name}: {str(e)}")
+
+        if not created_images and errors:
+             return Response({'error': 'Failed to upload images', 'details': errors}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return Response(created_images, status=status.HTTP_201_CREATED)
 
@@ -182,6 +201,18 @@ class AdminCarImageDeleteView(generics.DestroyAPIView):
     """
     queryset = CarImage.objects.all()
     permission_classes = [permissions.IsAdminUser]
+
+    def perform_destroy(self, instance):
+        # Delete from Cloudinary
+        if instance.cloudinary_public_id:
+            try:
+                cloudinary.uploader.destroy(instance.cloudinary_public_id)
+            except Exception as e:
+                # Log error but continue with DB deletion
+                print(f"Failed to delete image from Cloudinary: {e}")
+        
+        # Delete from DB
+        instance.delete()
 
 
 class AdminCategoryListCreateView(generics.ListCreateAPIView):
